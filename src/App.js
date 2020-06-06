@@ -5,6 +5,8 @@ import './App.css';
 import server from './server';
 import Button from 'react-bootstrap/Button'
 import UsersContainer from './UsersContainer';
+import Counter from './Counter';
+import Movie from './Movie';
 /*
   functional components
   classbased component
@@ -40,6 +42,10 @@ class App extends Component {
     this.state = {
       name: 'raghu Rayapudi',
       toggle: true,
+      Movies: [{
+        title: 'Avengers',
+        releaseDate: '02-10-2020'
+      }],
       users: []
     }
     this.toggleDisplayElement = this.toggleDisplayElement.bind(this);
@@ -69,11 +75,11 @@ class App extends Component {
     // we should not perform side effects. - dont's
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // dont update state and dont call setState
-    console.log("ShouldComponentUpdate");
-      return nextProps.id !== this.props.id;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // dont update state and dont call setState
+  //   console.log("ShouldComponentUpdate");
+  //     return nextProps.id !== this.props.id;
+  // }
 
   render() {
       // setState inside render 
@@ -90,6 +96,14 @@ class App extends Component {
         <Button variant="primary" onClick={this.changeName}>Click Me</Button>
         <Button variant="primary" onClick = {this.toggleDisplayElement}>Toggle</Button>
         <Header className="header" name={this.state.name} />
+        <Movie {...this.state.Movies[0]}/>
+        <button onClick={()=> this.setState({
+          Movies: [{
+        title: 'Black Panther',
+        releaseDate: '02-10-2020'
+      }]
+      })}>ChangeMovie</button>
+        <Counter />
         <UsersContainer users={this.state.users}/>
          {(this.state.toggle) ? <div style={toggleStyle}>Toogle Value is True</div> : <div style={toggleStyle}>Toogle Value is False</div> }
         <Footer />
