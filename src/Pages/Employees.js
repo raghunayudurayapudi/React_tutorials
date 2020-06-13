@@ -19,6 +19,10 @@ class Employess extends Component {
   };
 
   componentDidMount() {
+
+    if(!localStorage.getItem('login')) {
+        this.props.history.push('/Login');
+    }
     server.get("/users").then(({ data }) => {
       this.setState({
         users: data.users,

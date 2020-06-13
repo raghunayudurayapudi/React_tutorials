@@ -7,22 +7,21 @@ import { Route, Switch } from "react-router-dom";
 import './App.css';
 import {Container, Button} from 'reactstrap'
 import Header from './Components/Header';
-class App extends Component {
+import LoginForm from './Components/Login';
+import UsersList from './UsersList';
 
-  state = {
-    login: false
-  }
+// User --> Login ---> /Employess Page
+class App extends Component {
   render() {
     return (
       <Container>
+       <UsersList/> 
       <Header />
-      <Button onClick={()=> {this.setState((previousState) => ({login: !previousState.login}))}}>
-        {this.state.login ? 'Logout': 'Login'}
-        </Button>
       <Switch>
         <Route exact path="/" render={() => <Overview />} />
-        {this.state.login && <Route exact path="/Projects" component={Projects} />}
-       {this.state.login && <Route path="/Employees" render={() => <Employees info="Additional information about the Route" />} />}
+        {<Route exact path="/Projects" component={Projects} />}
+       {<Route path="/Employees" render={() => <Employees info="Additional information about the Route" />} />}
+        <Route path='/Login' component={LoginForm} />
         <Route render={() => <NotFound />} />
       </Switch>
       </Container>

@@ -11,7 +11,12 @@ class Projects extends React.Component {
     };
   }
   componentDidMount() {
+
+    if(!localStorage.getItem('login')) {
+        this.props.history.push('/Login');
+    }
       console.log(this.props.location)
+
     server.get("/projects")
       .then(({data}) => {
         this.setState({
